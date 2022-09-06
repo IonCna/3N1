@@ -14,7 +14,7 @@ function main(number) {
         count.push(counter)
     } while (N > 1)
 
-    count.push(counter += 2)
+    count.push(counter++)
 
     return {
         data: res,
