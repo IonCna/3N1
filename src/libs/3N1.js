@@ -1,9 +1,18 @@
 function main(number) {
-    let N = (number * 3) + 1
-    let res = [number, N]
+    console.clear()
+    console.log(number + " input")
 
-    let counter = 0
-    let count = [counter]
+    let res = [], count = []
+    let N = 0, counter = 0
+
+    res.push(number)
+    count.push(counter)
+
+    number % 2 == 0 ? N = number / 2 : N = (3 * number) + 1
+
+    res.push(N)
+    counter++
+    count.push(counter)
 
     do {
         N % 2 == 0 ? N /= 2 : N = (N * 3) + 1
@@ -13,8 +22,6 @@ function main(number) {
         counter++
         count.push(counter)
     } while (N > 1)
-
-    count.push(counter + 2)
 
     return {
         data: res,
