@@ -1,7 +1,4 @@
 function main(number) {
-    console.clear()
-    console.log(number + " input")
-
     let res = [], count = []
     let N = 0, counter = 0
 
