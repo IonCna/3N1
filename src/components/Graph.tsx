@@ -1,5 +1,5 @@
 import { useEffect, useState } from "preact/hooks"
-import { LineChart, Line, CartesianGrid, XAxis, YAxis } from "recharts"
+import { LineChart, Line, CartesianGrid, XAxis, YAxis, Tooltip } from "recharts"
 
 interface Props {
   data: Data[]
@@ -25,9 +25,10 @@ const Graph = ({ data }: Props) => {
   return (
     <LineChart width={width} height={height} data={data}>
       <Line type="monotone" dataKey="uv" stroke='#fff' />
-      <CartesianGrid stroke="#ccc"/>
-      <XAxis dataKey="name"/>
+      <CartesianGrid stroke="#ccc" />
+      <XAxis dataKey="name" />
       <YAxis />
+      <Tooltip animationDuration={0} />
     </LineChart>
   )
 }
