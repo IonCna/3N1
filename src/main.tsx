@@ -1,25 +1,31 @@
 import { render } from 'preact'
 import { useState } from "preact/hooks"
-// import { v4 } from "uuid"
-// import Modal from './components/Modal'
+import { v4 } from "uuid"
+import Modal from './components/Modal'
 
 import "./base.css"
 import Graph from './components/Graph'
 
 const App = () => {
-  // const [isInputEmpty, setIsInputEmpty] = useState(false)
-  // const [isValidInput] = useState(false)
+  const [isInputEmpty, setIsInputEmpty] = useState(false)
+  const [isValidInput, setIsValidInput] = useState(true)
+  const [isLowerCero, setIsLowerCero] = useState(false)
+  const [isWeirdInput, setIsWeirdInput] = useState(false)
+
   const [values, setValues] = useState<Data[]>([])
 
   const click = () => {
     const target = document.getElementById("target") as HTMLInputElement
     const { value } = target
 
-    if (!value) return
+    if (!value) return setIsInputEmpty(true)
     const targetToNumber = parseInt(value)
     const isInvalid = isNaN(targetToNumber)
 
-    if (isInvalid) return
+    if(value.startsWith("e")) return setIsWeirdInput(true)
+
+    if (isInvalid) return setIsValidInput(false)
+    if (targetToNumber <= 0) return setIsLowerCero(true)
 
     const results: number[] = [targetToNumber]
     let number = targetToNumber
@@ -47,8 +53,10 @@ const App = () => {
         {values.length > 0 && <Graph data={values} />}
       </div>
 
-      { /** <Modal title='Ups!' content='No has ingresado ningún numero' open={isInputEmpty} /> */}
-      { /** <Modal title='Ups!' content='El valor ingresado no es válido' open={isValidInput} />*/}
+      <Modal message='No has puesto nada para mostrar :(' open={isInputEmpty} id={v4()} />
+      <Modal message='El input no es válido' open={!isValidInput} id={v4()} />
+      <Modal message='El valor ingresado es menor o igual a 0, eso no se vale!' open={isLowerCero} id={v4()} />
+      <Modal message='Nada de cosas raras he...' open={isWeirdInput} id={v4()} />
     </div>
   )
 }
